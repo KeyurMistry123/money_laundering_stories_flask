@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for Stories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .story {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .no-results {
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search for Stories</h1>
+        <form action="/search" method="POST">
+            <input type="text" name="name" placeholder="Enter individual's name" required>
+            <input type="submit" value="Search">
+        </form>
+        <div class="results">
+            {% if name %}
+                <h2>Results for "{{ name }}"</h2>
+                {% if stories %}
+                    {% for story in stories %}
+                        <div class="story">{{ story }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">No stories found for "{{ name }}".</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
